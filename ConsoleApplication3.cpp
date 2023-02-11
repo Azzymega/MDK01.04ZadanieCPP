@@ -6,33 +6,53 @@ using namespace std;
 
 
 class Printable {
-    virtual void print();
+public:
+    virtual void print(){
+
+    }
 };
 class Instrument {
-    virtual void play();
-};
-class Book : Printable {
 public:
+    virtual void play() {
+
+    }
+};
+class Book : public Printable {
+public:
+    Book() {
+
+    }
     void print() override {
-        cout << "This is Book";
+        cout << "This is Book\n";
     }
     void static printBook(Printable *print[], int printLenght) {
-        
+        while (printLenght>0)
+        {
+            cout << print[printLenght-1];
+            printLenght--;
+        }
     }
 };
-class Magazine : Printable {
+class Magazine : public Printable {
 public:
     void print() override {
-        cout << "This is Magazine";
+        cout << "This is Magazine\n";
     }
-    void static printMagazine(Printable print[]) {
+    void static printMagazine() {
 
     }
 };
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Printable *print[4];
+    Book book = Book();
+    Magazine magazine = Magazine();
+    print[0] = &book;
+    print[1] = &magazine;
+    print[0]->print();
+    print[1]->print();
+    *print[0] = *print[1];
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
